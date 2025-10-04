@@ -112,7 +112,13 @@ export class WelcomePage extends LitElement {
             <input type="text" id="playerName" name="playerName" required />
           </div>
           
-          <slider-astronauts></slider-astronauts>
+          <slider-astronauts
+            @value-changed=${(e: CustomEvent) => {
+              console.log("slider", e);
+              this._astronautsQuantity = e.detail;
+            }}
+            .value=${this._astronautsQuantity}
+          />
 
           <div class="form-group">
             <label for="astronautsQuantity">Tamanho da Tripulação</label>

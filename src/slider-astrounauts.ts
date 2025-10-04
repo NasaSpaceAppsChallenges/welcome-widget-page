@@ -26,9 +26,7 @@ export class SliderAstrounauts extends LitElement {
       }
 
       .btn {
-          background: #0f0f0f;
           color: #fff;
-          border: 0;
           border-radius: 20px;
           padding: 12px;
           display: inline-flex;
@@ -36,6 +34,10 @@ export class SliderAstrounauts extends LitElement {
           justify-content: center;
           box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
           touch-action: manipulation;
+          border-color: rgba(0, 183, 215, 0.2);
+          border-style: solid;
+          border-width: 1px;
+          background-color: color-mix(in oklab, #0f172b 70%, transparent);
       }
 
       .btn:active {
@@ -115,16 +117,20 @@ export class SliderAstrounauts extends LitElement {
       .tile {
           aspect-ratio: 1/1;
           border-radius: 4px;
-          background: #161616;
+          //background: #161616;
           display: flex;
           align-items: center;
           justify-content: center;
           outline: none;
-          border: 0;
+          //border: 0;
           box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
           cursor: pointer;
           width: 32px;
           height: 32px;
+          border-color: rgba(0, 183, 215, 0.2);
+          border-style: solid;
+          border-width: 1px;
+          background-color: color-mix(in oklab, #0f172b 70%, transparent);
       }
 
       .tile:active {
@@ -143,8 +149,11 @@ export class SliderAstrounauts extends LitElement {
           position: relative;
           height: 16px;
           border-radius: 999px;
-          background: #1e1e1e;
           cursor: pointer;
+          background-color: color-mix(in oklab, #0f172b 70%, transparent);
+          border-color: rgba(0, 183, 215, 0.2);
+          border-style: solid;
+          border-width: 1px;
       }
 
       .fill {
@@ -153,9 +162,9 @@ export class SliderAstrounauts extends LitElement {
           left: 0;
           height: 16px;
           border-radius: 999px;
-          background: rgba(255, 255, 255, 0.85);
           width: 12px;
           transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+          background-image: linear-gradient(to right in oklab, #00d3f3 0%, #00d492 100%);
       }
 
       .knob {
@@ -224,9 +233,6 @@ export class SliderAstrounauts extends LitElement {
 
   @query('#knob')
   private knob!: HTMLDivElement;
-
-  @query('#knobVal')
-  private knobVal!: HTMLSpanElement;
 
   @query('#fill')
   private fill!: HTMLDivElement;
@@ -403,8 +409,13 @@ export class SliderAstrounauts extends LitElement {
     this.value = next;
     // atualiza ARIA
     this.knob.setAttribute('aria-valuenow', String(this.value));
-    this.knobVal.textContent = String(this.value);
     this._syncVisual();
+    const ev = new CustomEvent('change', {
+      detail: {value: this.value},
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(ev);
   }
 
   private _syncVisual() {
