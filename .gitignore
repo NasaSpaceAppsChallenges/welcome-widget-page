@@ -34,3 +34,11 @@ astronauts-step.d.ts
 astronauts-step.d.ts.map
 # only generated for size check
 astronauts-step.bundled.js
+
+
+play-button.js
+play-button.js.map
+play-button.d.ts
+play-button.d.ts.map
+# only generated for size check
+play-button.bundled.js

@@ -1,6 +1,6 @@
 {
   "name": "@leandrodasilva/welcome-page",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "publishConfig": {
     "access": "public"
   },
@@ -30,7 +30,8 @@
     "slider-astrounauts.{js,js.map,d.ts,d.ts.map}",
     "my-element.{js,js.map,d.ts,d.ts.map}",
     "mission-step.{js,js.map,d.ts,d.ts.map}",
-    "astronauts-step.{js,js.map,d.ts,d.ts.map}"
+    "astronauts-step.{js,js.map,d.ts,d.ts.map}",
+    "play-button.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",
