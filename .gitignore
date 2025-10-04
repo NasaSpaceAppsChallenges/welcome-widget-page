@@ -13,3 +13,10 @@ docs/node_modules
 .idea
 .vercel
 .npmrc
+# top level source
+slider-astrounauts.js
+slider-astrounauts.js.map
+slider-astrounauts.d.ts
+slider-astrounauts.d.ts.map
+# only generated for size check
+slider-astrounauts.bundled.js

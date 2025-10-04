@@ -1,5 +1,6 @@
-import {LitElement, html, css} from 'lit';
+import {css, html, LitElement} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
+import './slider-astrounauts.js';
 
 // Campos
 // Nome do jogador*
@@ -29,7 +30,7 @@ export class WelcomePage extends LitElement {
           border-radius: 1.5rem;
           backdrop-filter: blur(10px);
           color: white;
-          border-color: rgba(0, 183, 215, .2);
+          border-color: rgba(0, 183, 215, 0.2);
           border-style: solid;
           border-width: 1px;
           width: 100%;
@@ -52,7 +53,7 @@ export class WelcomePage extends LitElement {
       }
 
       form button {
-          border-color: rgba(0, 183, 215, .2);
+          border-color: rgba(0, 183, 215, 0.2);
           border-style: solid;
           border-width: 1px;
           background-color: color-mix(in oklab, #1a284c 70%, transparent);
@@ -62,22 +63,22 @@ export class WelcomePage extends LitElement {
           margin: auto 8px 8px;
       }
   `;
-
+  
   /**
    * The name to say "Hello" to.
    */
   @property()
   name = 'World';
-
+  
   /**
    * The number of times the button has been clicked.
    */
   @property({type: Number})
   count = 0;
-
+  
   @state()
   private _astronautsQuantity = 1;
-
+  
   override render() {
     return html`
       <div class="card">
@@ -110,6 +111,8 @@ export class WelcomePage extends LitElement {
             <label for="playerName">Nome do jogador*</label>
             <input type="text" id="playerName" name="playerName" required />
           </div>
+          
+          <slider-astronauts></slider-astronauts>
 
           <div class="form-group">
             <label for="astronautsQuantity">Tamanho da Tripulação</label>
@@ -133,7 +136,7 @@ export class WelcomePage extends LitElement {
       </div>
     `;
   }
-
+  
   private _onSubmit(e: Event) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -159,5 +162,28 @@ export class WelcomePage extends LitElement {
 declare global {
   interface HTMLElementTagNameMap {
     'welcome-page': WelcomePage;
+  }
+}
+
+// declare rive in the global scope
+
+interface Rive {
+  new(options: {
+    src: string;
+    canvas: HTMLCanvasElement;
+    autoplay: boolean;
+    stateMachines: string;
+    onLoad: () => void;
+    artboard?: string;
+  }): {
+    resizeDrawingSurfaceToCanvas: () => void;
+  };
+}
+
+declare global {
+  interface Window {
+    rive: {
+      Rive: Rive
+    };
   }
 }
