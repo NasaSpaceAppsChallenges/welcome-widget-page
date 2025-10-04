@@ -1,11 +1,6 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 
-// Campos
-// Nome do jogador*
-// Destino da missão*
-// Descrição da missão*
-// Tamanho da tripulação(opcional)
 @customElement('welcome-page')
 export class WelcomePage extends LitElement {
   static override styles = css`
@@ -34,7 +29,6 @@ export class WelcomePage extends LitElement {
 
       .card {
           display: block;
-          //border: solid 1px rgba(255, 255, 255, 0.2);
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           border-radius: 1.5rem;
           backdrop-filter: blur(10px);
@@ -45,20 +39,6 @@ export class WelcomePage extends LitElement {
           width: 100%;
           height: calc(100% - 32px);
           background-color: color-mix(in oklab, #0f172b 70%, transparent);
-      }
-
-      .form-group {
-          display: flex;
-          flex-direction: column;
-          padding: 16px;
-          margin: 0 16px;
-      }
-
-      form {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          height: 100%;
       }
 
       button {
