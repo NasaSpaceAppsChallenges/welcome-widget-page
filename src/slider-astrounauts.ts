@@ -19,12 +19,6 @@ export class SliderAstrounauts extends LitElement {
           padding: 24px;
       }
 
-      //.selector {
-      //    width: min(96vw, 560px);
-      //}
-
-      /* Top bar */
-
       .top {
           display: flex;
           align-items: center;
@@ -67,7 +61,7 @@ export class SliderAstrounauts extends LitElement {
           font-size: 10px;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #7a7a7a;
+          color: #ffffff;
       }
 
       .value {
@@ -78,8 +72,6 @@ export class SliderAstrounauts extends LitElement {
           font-weight: 900;
           min-width: 1.2em;
       }
-
-      /* flip animation */
 
       .flip-enter {
           position: absolute;
@@ -108,11 +100,9 @@ export class SliderAstrounauts extends LitElement {
 
       .hint {
           font-size: 10px;
-          color: #7a7a7a;
+          color: #ffffff;
           margin-top: 4px;
       }
-
-      /* Avatars grid */
 
       .grid {
           margin-top: 16px;
@@ -144,8 +134,6 @@ export class SliderAstrounauts extends LitElement {
       .tile.active {
           outline: 2px solid rgba(255, 255, 255, 0.6);
       }
-
-      /* Slider */
 
       .slider {
           margin-top: 22px;
@@ -195,12 +183,10 @@ export class SliderAstrounauts extends LitElement {
       .scale {
           display: flex;
           justify-content: space-between;
-          margin-top: 6px;
-          font-size: 11px;
-          color: #7a7a7a;
+          margin-top: 16px;
+          font-size: 16px;
+          color: #ffffff;
       }
-
-      /* Utility */
 
       .sr {
           position: absolute;
