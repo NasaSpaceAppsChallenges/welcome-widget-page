@@ -8,214 +8,211 @@ function clamp(n: number, a: number, b: number) {
 @customElement('slider-astronauts')
 export class SliderAstrounauts extends LitElement {
   static override styles = css`
-    * {
-      box-sizing: border-box;
-    }
-
-    .wrap {
-      min-height: 100%;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    .selector {
-      width: min(96vw, 560px);
-    }
-
-    /* Top bar */
-
-    .top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn {
-      background: #0f0f0f;
-      color: #fff;
-      border: 0;
-      border-radius: 20px;
-      padding: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      touch-action: manipulation;
-    }
-
-    .btn:active {
-      transform: scale(0.96);
-    }
-
-    .btn:hover {
-      filter: brightness(2);
-      cursor: pointer;
-    }
-
-    .btn svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .counter {
-      flex: 1;
-      text-align: center;
-    }
-
-    .label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7a7a7a;
-    }
-
-    .value {
-      display: inline-block;
-      position: relative;
-      font-size: 56px;
-      line-height: 1;
-      font-weight: 900;
-      min-width: 1.2em;
-    }
-
-    /* flip animation */
-
-    .flip-enter {
-      position: absolute;
-      inset: 0;
-      transform: translateY(16px) rotateX(-90deg);
-      opacity: 0;
-      transform-origin: bottom;
-    }
-
-    .flip-enter-active {
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s;
-      transform: translateY(0) rotateX(0);
-      opacity: 1;
-    }
-
-    .flip-exit {
-      position: absolute;
-      inset: 0;
-    }
-
-    .flip-exit-active {
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s;
-      transform: translateY(-16px) rotateX(90deg);
-      opacity: 0;
-    }
-
-    .hint {
-      font-size: 10px;
-      color: #7a7a7a;
-      margin-top: 4px;
-    }
-
-    /* Avatars grid */
-
-    .grid {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-    }
-
-    @media (min-width: 520px) {
-      .grid {
-        grid-template-columns: repeat(10, 1fr);
+      * {
+          box-sizing: border-box;
       }
-    }
 
-    .tile {
-      aspect-ratio: 1/1;
-      border-radius: 16px;
-      background: #161616;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      outline: none;
-      border: 0;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      cursor: pointer;
-    }
+      .wrap {
+          min-height: 100%;
+          display: grid;
+          place-items: center;
+          padding: 24px;
+      }
 
-    .tile:active {
-      transform: scale(0.97);
-    }
+      //.selector {
+      //    width: min(96vw, 560px);
+      //}
 
-    .tile.active {
-      outline: 2px solid rgba(255, 255, 255, 0.6);
-    }
+      /* Top bar */
 
-    /* Slider */
+      .top {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+      }
 
-    .slider {
-      margin-top: 22px;
-    }
+      .btn {
+          background: #0f0f0f;
+          color: #fff;
+          border: 0;
+          border-radius: 20px;
+          padding: 12px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+          touch-action: manipulation;
+      }
 
-    .track {
-      position: relative;
-      height: 16px;
-      border-radius: 999px;
-      background: #1e1e1e;
-      cursor: pointer;
-    }
+      .btn:active {
+          transform: scale(0.96);
+      }
 
-    .fill {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.85);
-      width: 12px;
-      transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
+      .btn:hover {
+          filter: brightness(2);
+          cursor: pointer;
+      }
 
-    .knob {
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      background: #fff;
-      color: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      border: 0;
-      outline: none;
-      touch-action: none;
-    }
+      .btn svg {
+          width: 24px;
+          height: 24px;
+      }
 
-    .knob:active {
-      transform: translate(-50%, -50%) scale(0.96);
-    }
+      .counter {
+          flex: 1;
+          text-align: center;
+      }
 
-    .scale {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 6px;
-      font-size: 11px;
-      color: #7a7a7a;
-    }
+      .label {
+          font-size: 10px;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #7a7a7a;
+      }
 
-    /* Utility */
+      .value {
+          display: inline-block;
+          position: relative;
+          font-size: 56px;
+          line-height: 1;
+          font-weight: 900;
+          min-width: 1.2em;
+      }
 
-    .sr {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
+      /* flip animation */
+
+      .flip-enter {
+          position: absolute;
+          inset: 0;
+          transform: translateY(16px) rotateX(-90deg);
+          opacity: 0;
+          transform-origin: bottom;
+      }
+
+      .flip-enter-active {
+          transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s;
+          transform: translateY(0) rotateX(0);
+          opacity: 1;
+      }
+
+      .flip-exit {
+          position: absolute;
+          inset: 0;
+      }
+
+      .flip-exit-active {
+          transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s;
+          transform: translateY(-16px) rotateX(90deg);
+          opacity: 0;
+      }
+
+      .hint {
+          font-size: 10px;
+          color: #7a7a7a;
+          margin-top: 4px;
+      }
+
+      /* Avatars grid */
+
+      .grid {
+          margin-top: 16px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          gap: 4px;
+      }
+
+      .tile {
+          aspect-ratio: 1/1;
+          border-radius: 4px;
+          background: #161616;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          outline: none;
+          border: 0;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+          cursor: pointer;
+          width: 32px;
+          height: 32px;
+      }
+
+      .tile:active {
+          transform: scale(0.97);
+      }
+
+      .tile.active {
+          outline: 2px solid rgba(255, 255, 255, 0.6);
+      }
+
+      /* Slider */
+
+      .slider {
+          margin-top: 22px;
+      }
+
+      .track {
+          position: relative;
+          height: 16px;
+          border-radius: 999px;
+          background: #1e1e1e;
+          cursor: pointer;
+      }
+
+      .fill {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 16px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.85);
+          width: 12px;
+          transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .knob {
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 36px;
+          height: 36px;
+          border-radius: 999px;
+          background: #fff;
+          color: #111;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+          border: 0;
+          outline: none;
+          touch-action: none;
+      }
+
+      .knob:active {
+          transform: translate(-50%, -50%) scale(0.96);
+      }
+
+      .scale {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 6px;
+          font-size: 11px;
+          color: #7a7a7a;
+      }
+
+      /* Utility */
+
+      .sr {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+      }
   `;
 
   @state()
@@ -236,15 +233,6 @@ export class SliderAstrounauts extends LitElement {
   @state()
   private tiles: HTMLButtonElement[] = [];
   
-  @state()
-  private flipKey = 0;
-  
-  @state()
-  private displayValue = 2;
-  
-  @state()
-  private isFlipping = false;
-
   @query('#track')
   private track!: HTMLDivElement;
 
@@ -256,9 +244,6 @@ export class SliderAstrounauts extends LitElement {
 
   @query('#fill')
   private fill!: HTMLDivElement;
-
-  @query('#value')
-  private valueEl!: HTMLDivElement;
 
   @query('#astronaut-svg')
   private svgTpl!: HTMLTemplateElement;
@@ -430,7 +415,6 @@ export class SliderAstrounauts extends LitElement {
       return;
     }
     this.value = next;
-    this.displayValue = next;
     // atualiza ARIA
     this.knob.setAttribute('aria-valuenow', String(this.value));
     this.knobVal.textContent = String(this.value);
