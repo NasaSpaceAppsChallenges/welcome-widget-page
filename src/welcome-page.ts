@@ -18,18 +18,22 @@ export class WelcomePage extends LitElement {
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #0f172b;
+          background-color: #020618;
       }
 
       .card {
           display: block;
-          border: solid 1px rgba(255, 255, 255, 0.2);
+          //border: solid 1px rgba(255, 255, 255, 0.2);
           padding: 16px;
           max-width: 800px;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          border-radius: 8px;
+          border-radius: 1.5rem;
           backdrop-filter: blur(10px);
           color: white;
+          border-color: rgba(0, 183, 215, .2);
+          border-style: solid;
+          border-width: 1px;
+          background-color: color-mix(in oklab, #0f172b 70%, transparent);
       }
 
       .form-group {
