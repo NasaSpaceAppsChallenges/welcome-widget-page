@@ -96,6 +96,8 @@ export class WelcomePage extends LitElement {
               <option value="orbit">Órbita Terrestre</option>
             </select>
           </div>
+          
+          <mission-step></mission-step>
 
           <div class="form-group">
             <label for="missionDescription">Descrição da missão*</label>

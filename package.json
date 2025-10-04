@@ -1,6 +1,6 @@
 {
   "name": "@leandrodasilva/welcome-page",
-  "version": "2.5.3",
+  "version": "2.6.0",
   "publishConfig": {
     "access": "public"
   },
@@ -28,7 +28,8 @@
   "files": [
     "welcome-page.{js,js.map,d.ts,d.ts.map}",
     "slider-astrounauts.{js,js.map,d.ts,d.ts.map}",
-    "my-element.{js,js.map,d.ts,d.ts.map}"
+    "my-element.{js,js.map,d.ts,d.ts.map}",
+    "mission-step.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",

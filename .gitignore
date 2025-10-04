@@ -20,3 +20,10 @@ slider-astrounauts.d.ts
 slider-astrounauts.d.ts.map
 # only generated for size check
 slider-astrounauts.bundled.js
+
+mission-step.js
+mission-step.js.map
+mission-step.d.ts
+mission-step.d.ts.map
+# only generated for size check
+mission-step.bundled.js
