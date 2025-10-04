@@ -25,6 +25,11 @@
   "type": "module",
   "main": "welcome-page.js",
   "types": "./welcome-page.d.ts",
+  "files": [
+    "welcome-page.{js,js.map,d.ts,d.ts.map}",
+    "slider-astrounauts.{js,js.map,d.ts,d.ts.map}",
+    "my-element.{js,js.map,d.ts,d.ts.map}"
+  ],
   "directories": {
     "doc": "docs",
     "test": "test"
