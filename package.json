@@ -1,6 +1,6 @@
 {
   "name": "@leandrodasilva/welcome-page",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "publishConfig": {
     "access": "public"
   },
