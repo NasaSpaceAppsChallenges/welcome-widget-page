@@ -1,27 +1,27 @@
 ---
 layout: page.11ty.cjs
-title: <my-element> ⌲ Home
+title: <welcome-page> ⌲ Home
 ---
 
-# &lt;my-element>
+# &lt;welcome-page>
 
-`<my-element>` is an awesome element. It's a great introduction to building web components with LitElement, with nice documentation site as well.
+`<welcome-page>` is an awesome element. It's a great introduction to building web components with LitElement, with nice documentation site as well.
 
 ## As easy as HTML
 
 <section class="columns">
   <div>
 
-`<my-element>` is just an HTML element. You can it anywhere you can use HTML!
+`<welcome-page>` is just an HTML element. You can it anywhere you can use HTML!
 
 ```html
-<my-element></my-element>
+<welcome-page></welcome-page>
 ```
 
   </div>
   <div>
 
-<my-element></my-element>
+<welcome-page></welcome-page>
 
   </div>
 </section>
@@ -31,16 +31,16 @@ title: <my-element> ⌲ Home
 <section class="columns">
   <div>
 
-`<my-element>` can be configured with attributed in plain HTML.
+`<welcome-page>` can be configured with attributed in plain HTML.
 
 ```html
-<my-element name="HTML"></my-element>
+<welcome-page name="HTML"></welcome-page>
 ```
 
   </div>
   <div>
 
-<my-element name="HTML"></my-element>
+<welcome-page name="HTML"></welcome-page>
 
   </div>
 </section>
@@ -50,7 +50,7 @@ title: <my-element> ⌲ Home
 <section class="columns">
   <div>
 
-`<my-element>` can be used with declarative rendering libraries like Angular, React, Vue, and lit-html
+`<welcome-page>` can be used with declarative rendering libraries like Angular, React, Vue, and lit-html
 
 ```js
 import {html, render} from 'lit-html';
@@ -59,8 +59,8 @@ const name = 'lit-html';
 
 render(
   html`
-    <h2>This is a &lt;my-element&gt;</h2>
-    <my-element .name=${name}></my-element>
+    <h2>This is a &lt;welcome-page&gt;</h2>
+    <welcome-page .name=${name}></welcome-page>
   `,
   document.body
 );
@@ -69,8 +69,8 @@ render(
   </div>
   <div>
 
-<h2>This is a &lt;my-element&gt;</h2>
-<my-element name="lit-html"></my-element>
+<h2>This is a &lt;welcome-page&gt;</h2>
+<welcome-page name="lit-html"></welcome-page>
 
   </div>
 </section>

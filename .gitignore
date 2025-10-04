@@ -3,11 +3,12 @@
 /test/
 custom-elements.json
 # top level source
-my-element.js
-my-element.js.map
-my-element.d.ts
-my-element.d.ts.map
+welcome-page.js
+welcome-page.js.map
+welcome-page.d.ts
+welcome-page.d.ts.map
 # only generated for size check
-my-element.bundled.js
+welcome-page.bundled.js
 docs/node_modules
 .idea
+.vercel
