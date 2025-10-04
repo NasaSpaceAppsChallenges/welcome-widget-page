@@ -12,3 +12,4 @@ welcome-page.bundled.js
 docs/node_modules
 .idea
 .vercel
+.npmrc
