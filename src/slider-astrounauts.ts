@@ -411,7 +411,7 @@ export class SliderAstrounauts extends LitElement {
     this.knob.setAttribute('aria-valuenow', String(this.value));
     this._syncVisual();
     const ev = new CustomEvent('change', {
-      detail: {value: this.value},
+      detail: this.value,
       bubbles: true,
       composed: true,
     });

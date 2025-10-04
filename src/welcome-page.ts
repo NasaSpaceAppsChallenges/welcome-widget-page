@@ -113,29 +113,11 @@ export class WelcomePage extends LitElement {
           </div>
           
           <slider-astronauts
-            @value-changed=${(e: CustomEvent) => {
-              console.log("slider", e);
+            @change=${(e: CustomEvent) => {
               this._astronautsQuantity = e.detail;
             }}
             .value=${this._astronautsQuantity}
-          />
-
-          <div class="form-group">
-            <label for="astronautsQuantity">Tamanho da Tripulação</label>
-            <input
-              type="number"
-              min="1"
-              id="astronautsQuantity"
-              name="astronautsQuantity"
-              required
-              .value=${String(this._astronautsQuantity)}
-              @input=${(e: Event) => {
-                const input = e.target as HTMLInputElement;
-                this._astronautsQuantity = Math.max(1, Number(input.value));
-                input.value = String(this._astronautsQuantity);
-              }}
-            />
-          </div>
+          ></slider-astronauts>
 
           <button type="submit">Iniciar</button>
         </form>
