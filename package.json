@@ -1,11 +1,34 @@
 {
-  "name": "@LeandrodaSilva/welcome-page",
-  "private": false,
-  "version": "2.0.2",
+  "name": "@leandrodasilva/welcome-page",
+  "version": "2.0.3",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A simple web component",
-  "main": "welcome-page.js",
   "module": "welcome-page.js",
+  "keywords": [
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit"
+  ],
+  "homepage": "https://github.com/NasaSpaceAppsChallenges/welcome-widget-page#readme",
+  "bugs": {
+    "url": "https://github.com/NasaSpaceAppsChallenges/welcome-widget-page/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NasaSpaceAppsChallenges/welcome-widget-page.git"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Google LLC",
   "type": "module",
+  "main": "welcome-page.js",
+  "types": "./welcome-page.d.ts",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
@@ -32,14 +55,6 @@
     "test:prod:watch": "MODE=prod wtr --watch",
     "checksize": "rollup -c ; cat welcome-page.bundled.js | gzip -9 | wc -c ; rm welcome-page.bundled.js"
   },
-  "keywords": [
-    "web-components",
-    "lit-element",
-    "typescript",
-    "lit"
-  ],
-  "author": "Google LLC",
-  "license": "BSD-3-Clause",
   "dependencies": {
     "lit": "^3.2.0"
   },

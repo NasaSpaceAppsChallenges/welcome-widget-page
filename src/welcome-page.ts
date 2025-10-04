@@ -1,19 +1,12 @@
-/**
- * @license
- * Copyright 2019 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
-/**
- * An example element.
- *
- * @fires count-changed - Indicates when the count changes
- * @slot - This element has a slot
- * @csspart button - The button
- */
+// Campos
+// Nome do jogador*
+// Destino da missão*
+// Descrição da missão*
+// Tamanho da tripulação(opcional)
+
 @customElement('welcome-page')
 export class WelcomePage extends LitElement {
   static override styles = css`
@@ -39,9 +32,8 @@ export class WelcomePage extends LitElement {
 
   override render() {
     return html`
-      <h1>${this.sayHello(this.name)}!</h1>
       <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
+        Count: ${this.count}
       </button>
       <slot></slot>
     `;
@@ -50,14 +42,6 @@ export class WelcomePage extends LitElement {
   private _onClick() {
     this.count++;
     this.dispatchEvent(new CustomEvent('count-changed'));
-  }
-
-  /**
-   * Formats a greeting
-   * @param name The name to say "Hello" to
-   */
-  sayHello(name: string): string {
-    return `Hello, ${name}`;
   }
 }
 
