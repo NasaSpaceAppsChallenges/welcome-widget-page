@@ -29,7 +29,8 @@
     "welcome-page.{js,js.map,d.ts,d.ts.map}",
     "slider-astrounauts.{js,js.map,d.ts,d.ts.map}",
     "my-element.{js,js.map,d.ts,d.ts.map}",
-    "mission-step.{js,js.map,d.ts,d.ts.map}"
+    "mission-step.{js,js.map,d.ts,d.ts.map}",
+    "astronauts-step.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",

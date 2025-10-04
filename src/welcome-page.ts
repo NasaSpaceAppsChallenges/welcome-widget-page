@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 
 // Campos
 // Nome do jogador*
@@ -20,6 +20,16 @@ export class WelcomePage extends LitElement {
           align-items: center;
           padding: 16px;
           background-color: #020618;
+      }
+
+      main {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 16px;
+          width: 100%;
+          height: 100%;
       }
 
       .card {
@@ -51,7 +61,7 @@ export class WelcomePage extends LitElement {
           height: 100%;
       }
 
-      form button {
+      button {
           border-color: rgba(0, 183, 215, 0.2);
           border-style: solid;
           border-width: 1px;
@@ -59,92 +69,70 @@ export class WelcomePage extends LitElement {
           color: white;
           border-radius: 16px;
           height: 50px;
-          margin: auto 8px 8px;
+          min-width: 80px;
+      }
+
+      button:active {
+          transform: scale(0.96);
+      }
+
+      button:hover {
+          filter: brightness(2);
+          cursor: pointer;
+      }
+      
+      .step-container {
+          width: 100%;
+          height: 100%;
+          max-height: calc(100% - 60px);
+      }
+      
+      .action-container {
+          width: 100%;
+          height: 50px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
       }
   `;
-  
-  /**
-   * The name to say "Hello" to.
-   */
-  @property()
-  name = 'World';
-  
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({type: Number})
-  count = 0;
-  
+
   @state()
-  private _astronautsQuantity = 1;
-  
+  private _currentStep = 1;
+
   override render() {
+    let step = html``;
+    switch (this._currentStep) {
+      case 2:
+        step = html` <astronauts-step></astronauts-step>`;
+        break;
+      default:
+      case 1:
+        step = html` <mission-step></mission-step>`;
+    }
     return html`
-      <div class="card">
-        <form @submit=${this._onSubmit}>
-          <div class="form-group">
-            <label for="missionDestination">Destino da missão*</label>
-            <select
-              id="missionDestination"
-              name="missionDestination"
-              required
-              .value=${'moon'}
-            >
-              <option value="" disabled selected>Selecione um destino</option>
-              <option value="moon">Lua</option>
-              <option value="mars">Marte</option>
-              <option value="orbit">Órbita Terrestre</option>
-            </select>
-          </div>
-          
-          <mission-step></mission-step>
-
-          <div class="form-group">
-            <label for="missionDescription">Descrição da missão*</label>
-            <textarea
-              id="missionDescription"
-              name="missionDescription"
-              required
-            ></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="playerName">Nome do jogador*</label>
-            <input type="text" id="playerName" name="playerName" required />
-          </div>
-          
-          <slider-astronauts
-            @change=${(e: CustomEvent) => {
-              this._astronautsQuantity = e.detail;
-            }}
-            .value=${this._astronautsQuantity}
-          ></slider-astronauts>
-
-          <button type="submit">Iniciar</button>
-        </form>
-      </div>
+      <main>
+        <div class="step-container">
+          ${step}
+        </div>
+        
+        <div class="action-container">
+          <button @click=${this._onPrev}>prev</button>
+          <button @click=${this._onNext}>next</button>
+        </div>
+      </main>
     `;
   }
   
-  private _onSubmit(e: Event) {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    console.log('Form Data:', Object.fromEntries(formData.entries()));
-    const data = {
-      playerName: formData.get('playerName'),
-      missionDestination: formData.get('missionDestination'),
-      missionDescription: formData.get('missionDescription'),
-      astronautsQuantity: this._astronautsQuantity,
-    };
-    console.log('Processed Data:', data);
-    localStorage.setItem('missionDetails', JSON.stringify(data));
-    const event = new CustomEvent('form-submit', {
-      detail: data,
-      bubbles: true,
-      composed: true,
-    });
-    this.dispatchEvent(event);
+  private _onNext() {
+    if (this._currentStep < 2) {
+      this._currentStep++;
+    }
+  }
+  
+  private _onPrev() {
+    if (this._currentStep > 1) {
+      this._currentStep--;
+    }
   }
 }
 
@@ -157,7 +145,7 @@ declare global {
 // declare rive in the global scope
 
 interface Rive {
-  new(options: {
+  new (options: {
     src: string;
     canvas: HTMLCanvasElement;
     autoplay: boolean;
@@ -172,7 +160,7 @@ interface Rive {
 declare global {
   interface Window {
     rive: {
-      Rive: Rive
+      Rive: Rive;
     };
   }
 }

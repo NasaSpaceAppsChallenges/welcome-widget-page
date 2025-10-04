@@ -1,14 +1,14 @@
 import {css, html, LitElement} from 'lit';
-import {customElement} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 
-@customElement('mission-step')
-export class MissionStep extends LitElement {
+@customElement('astronauts-step')
+export class AstronautsStep extends LitElement {
   static override styles = css`
       :host {
           width: 100%;
           height: 100%;
       }
-      
+
       .card {
           display: block;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -23,11 +23,19 @@ export class MissionStep extends LitElement {
           background-color: color-mix(in oklab, #0f172b 70%, transparent);
       }
   `;
-
+  
+  @state()
+  private _astronautsQuantity = 1;
+  
   override render() {
     return html`
       <div class="card">
-        mission-step works!
+        <slider-astronauts
+          @change=${(e: CustomEvent) => {
+            this._astronautsQuantity = e.detail;
+          }}
+          .value=${this._astronautsQuantity}
+        ></slider-astronauts>
       </div>
     `;
   }
@@ -35,6 +43,6 @@ export class MissionStep extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'mission-step': MissionStep;
+    'astronauts-step': AstronautsStep;
   }
 }

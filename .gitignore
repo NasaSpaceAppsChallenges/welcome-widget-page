@@ -27,3 +27,10 @@ mission-step.d.ts
 mission-step.d.ts.map
 # only generated for size check
 mission-step.bundled.js
+
+astronauts-step.js
+astronauts-step.js.map
+astronauts-step.d.ts
+astronauts-step.d.ts.map
+# only generated for size check
+astronauts-step.bundled.js
