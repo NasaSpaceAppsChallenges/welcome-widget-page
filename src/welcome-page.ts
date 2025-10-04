@@ -18,14 +18,13 @@ export class WelcomePage extends LitElement {
           display: flex;
           justify-content: center;
           align-items: center;
+          padding: 16px;
           background-color: #020618;
       }
 
       .card {
           display: block;
           //border: solid 1px rgba(255, 255, 255, 0.2);
-          padding: 16px;
-          max-width: 800px;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           border-radius: 1.5rem;
           backdrop-filter: blur(10px);
@@ -33,6 +32,8 @@ export class WelcomePage extends LitElement {
           border-color: rgba(0, 183, 215, .2);
           border-style: solid;
           border-width: 1px;
+          width: 100%;
+          height: calc(100% - 32px);
           background-color: color-mix(in oklab, #0f172b 70%, transparent);
       }
 
@@ -40,12 +41,25 @@ export class WelcomePage extends LitElement {
           display: flex;
           flex-direction: column;
           padding: 16px;
+          margin: 0 16px;
       }
 
       form {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          height: 100%;
+      }
+
+      form button {
+          border-color: rgba(0, 183, 215, .2);
+          border-style: solid;
+          border-width: 1px;
+          background-color: color-mix(in oklab, #1a284c 70%, transparent);
+          color: white;
+          border-radius: 16px;
+          height: 50px;
+          margin: auto 8px 8px;
       }
   `;
 
@@ -114,7 +128,7 @@ export class WelcomePage extends LitElement {
             />
           </div>
 
-          <button type="submit">Enviar</button>
+          <button type="submit">Iniciar</button>
         </form>
       </div>
     `;
