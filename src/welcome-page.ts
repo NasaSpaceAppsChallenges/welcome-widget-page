@@ -1,6 +1,6 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
-import './slider-astrounauts.js';
+import './slider-astrounauts';
 
 // Campos
 // Nome do jogador*
