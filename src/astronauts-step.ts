@@ -3,6 +3,11 @@ import {customElement, property} from 'lit/decorators.js';
 
 @customElement('astronauts-step')
 export class AstronautsStep extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    mode: 'closed' as const
+  };
+  
   static override styles = css`
     :host {
       width: 100%;

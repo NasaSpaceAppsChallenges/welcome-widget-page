@@ -3,6 +3,11 @@ import {customElement, property, state} from 'lit/decorators.js';
 
 @customElement('mission-step')
 export class MissionStep extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    mode: 'closed' as const
+  };
+  
   static override styles = css`
       :host {
           width: 100%;
@@ -326,6 +331,12 @@ export class MissionStep extends LitElement {
   
   @state()
   private touchEndX = 0;
+  
+  @state()
+  private _stars = [html``];
+  
+  @state()
+  private _particles = [html``];
 
   private handleTouchStart(e: TouchEvent) {
     this.touchStartX = e.touches[0].clientX;
@@ -352,6 +363,12 @@ export class MissionStep extends LitElement {
       detail: this.mission
     }));
   }
+  
+  override firstUpdated() {
+    // Initial star and sand particle generation
+    this.generateStars();
+    this.generateSandParticles();
+  }
 
   private generateStars() {
     const stars = [];
@@ -367,17 +384,17 @@ export class MissionStep extends LitElement {
         </div>
       `);
     }
-    return stars;
+    this._stars =  stars;
   }
 
   private generateSandParticles() {
     const particles = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
       const left = Math.random() * 100;
       const top = Math.random() * 100;
       const width = Math.random() * 15 + 5; // Largura do traço: 5-20px
       const animationDuration = Math.random() * 8 + 6; // 6-14 segundos
-      const delay = Math.random() * 8;
+      const delay = Math.random() * 3;
       particles.push(html`
         <div
           class="sand-particle"
@@ -385,7 +402,7 @@ export class MissionStep extends LitElement {
         </div>
       `);
     }
-    return particles;
+    this._particles = particles;
   }
 
   override render() {
@@ -395,11 +412,11 @@ export class MissionStep extends LitElement {
     return html`
       <div class="card ${isMoon ? 'moon-selected' : 'mars-selected'}">
         <div class="stars ${isMoon ? 'visible' : ''}">
-          ${this.generateStars()}
+          ${this._stars}
         </div>
         
         <div class="sand-storm ${!isMoon ? 'visible' : ''}">
-          ${this.generateSandParticles()}
+          ${this._particles}
         </div>
         
         <div class="mission-container">

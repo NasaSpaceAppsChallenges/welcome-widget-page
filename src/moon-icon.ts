@@ -3,6 +3,11 @@ import {customElement, query} from 'lit/decorators.js';
 
 @customElement('moon-icon')
 export class MoonIcon extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    mode: 'closed' as const
+  };
+  
   static override styles = css`
       :host {
           display: flex;
@@ -16,6 +21,7 @@ export class MoonIcon extends LitElement {
           border-style: solid;
           border-width: 1px;
           border-radius: 1.5rem;
+          background-color: black;
       }
       
       canvas {

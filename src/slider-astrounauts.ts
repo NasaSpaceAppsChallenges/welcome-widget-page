@@ -7,6 +7,11 @@ function clamp(n: number, a: number, b: number) {
 
 @customElement('slider-astronauts')
 export class SliderAstrounauts extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    mode: 'closed' as const
+  };
+  
   static override styles = css`
       * {
           box-sizing: border-box;

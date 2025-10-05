@@ -3,6 +3,11 @@ import {customElement, query} from 'lit/decorators.js';
 
 @customElement('play-button')
 export class PlayButton extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    mode: 'closed' as const
+  };
+  
   static override styles = css`
       :host {
           height: 100%;

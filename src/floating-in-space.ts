@@ -3,6 +3,11 @@ import {customElement, query} from 'lit/decorators.js';
 
 @customElement('floating-in-space')
 export class FloatingInSpace extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    mode: 'closed' as const
+  };
+  
   static override styles = css`
       :host {
           display: flex;
@@ -19,11 +24,13 @@ export class FloatingInSpace extends LitElement {
       }
       
       canvas {
-          position: absolute;
+          position: relative;
           top: 0;
-          left: -50px;
-          width: 600px;
-          height: 100%;
+          bottom: 0;
+          left: 0;
+          width: auto;
+          height: 100vh;
+          aspect-ratio: 16/9
           background-color: black;
           opacity: 0.6;
       }
