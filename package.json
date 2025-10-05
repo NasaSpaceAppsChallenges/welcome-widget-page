@@ -1,6 +1,6 @@
 {
   "name": "@leandrodasilva/welcome-page",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "publishConfig": {
     "access": "public"
   },
@@ -31,7 +31,8 @@
     "my-element.{js,js.map,d.ts,d.ts.map}",
     "mission-step.{js,js.map,d.ts,d.ts.map}",
     "astronauts-step.{js,js.map,d.ts,d.ts.map}",
-    "play-button.{js,js.map,d.ts,d.ts.map}"
+    "play-button.{js,js.map,d.ts,d.ts.map}",
+    "moon-icon.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",
