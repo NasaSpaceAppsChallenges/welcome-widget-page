@@ -95,7 +95,7 @@ export class SplashScreen extends LitElement {
     .logo {
       width: 100%;
       height: auto;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .text-container {
