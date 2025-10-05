@@ -11,6 +11,7 @@ export class PlayButton extends LitElement {
           display: flex;
           justify-content: center;
           align-items: center;
+          pointer-events: none;
       }
       
       .button-container {
@@ -21,6 +22,7 @@ export class PlayButton extends LitElement {
           position: relative;
           overflow: hidden;
           border-radius: 15px;
+          pointer-events: none;
       }
       
       canvas {
@@ -30,6 +32,7 @@ export class PlayButton extends LitElement {
           width: 250px;
           height: 200px;
           padding: -50px;
+          pointer-events: none;
       }
   `;
   
@@ -51,7 +54,18 @@ export class PlayButton extends LitElement {
   override render() {
     return html`
       <div class="button-container">
-        <canvas id="canvas" width="50" height="50"></canvas>
+        <canvas
+          id="canvas"
+          width="50"
+          height="50"
+          @click=${() => {
+            const event = new CustomEvent('click-play', {
+              bubbles: true,
+              composed: true,
+            });
+            this.dispatchEvent(event);
+          }}
+        ></canvas>
       </div>
     `;
   }

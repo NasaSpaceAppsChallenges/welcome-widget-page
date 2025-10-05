@@ -170,7 +170,9 @@ export class WelcomePage extends LitElement {
                 class="btn-play"
                 @click=${this._submit}
               >
-                <play-button></play-button>
+                <play-button
+                  @click-play=${this._submit}
+                ></play-button>
               </button>
             `
             : html`
@@ -217,6 +219,7 @@ export class WelcomePage extends LitElement {
       bubbles: true,
       composed: true,
     });
+    console.log('submit', event)
     this.dispatchEvent(event);
   }
 }
