@@ -30,7 +30,9 @@ export class AstronautsStep extends LitElement {
       }
 
       .container {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           border-radius: 1.5rem;
           backdrop-filter: blur(10px);
@@ -43,6 +45,29 @@ export class AstronautsStep extends LitElement {
           top: 0;
           bottom: 0;
           background-color: color-mix(in oklab, #0f172b 70%, transparent);
+          gap: 24px;
+      }
+
+      .title-container {
+          text-align: center;
+          width: auto;
+      }
+
+      h2 {
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin: 0 0 12px 0;
+          background: white;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+      }
+
+      .subtitle {
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.7);
+          margin: 0;
+          line-height: 1.5;
       }
 
       floating-in-space {
@@ -66,6 +91,11 @@ export class AstronautsStep extends LitElement {
       <div class="card">
         <floating-in-space></floating-in-space>
         <div class="container">
+          <div class="title-container">
+            <h2>Selecione a quantidade de astronautas</h2>
+            <p class="subtitle">Você pode escolher entre 2 a 8 astronautas</p>
+            <p class="subtitle">que farão parte da missão.</p>
+          </div>
           <slider-astronauts
             @change=${(e: CustomEvent) => {
               this.astronautsQuantity = e.detail;
