@@ -74,7 +74,7 @@ export class SplashScreen extends LitElement {
 
     .logo-container {
       width: 150px;
-      height: 150px;
+      height: auto;
       border-radius: 30px;
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0, 183, 215, 0.3);
