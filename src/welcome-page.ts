@@ -245,7 +245,14 @@ export class WelcomePage extends LitElement {
   @state()
   private isLoading = false;
 
+  @state()
+  private showSplash = true;
+
   override render() {
+    if (this.showSplash) {
+      return html`<splash-screen @splash-complete=${this._onSplashComplete}></splash-screen>`;
+    }
+
     let step = html``;
     switch (this._currentStep) {
       case 2:
@@ -403,6 +410,10 @@ export class WelcomePage extends LitElement {
     if (this._currentStep > 1) {
       this._currentStep--;
     }
+  }
+  
+  private _onSplashComplete() {
+    this.showSplash = false;
   }
   
   private _submit() {

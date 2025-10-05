@@ -70,3 +70,10 @@ description-step.d.ts
 description-step.d.ts.map
 # only generated for size check
 description-step.bundled.js
+
+splash-screen.js
+splash-screen.js.map
+splash-screen.d.ts
+splash-screen.d.ts.map
+# only generated for size check
+splash-screen.bundled.js

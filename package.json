@@ -1,6 +1,6 @@
 {
   "name": "@leandrodasilva/welcome-page",
-  "version": "2.25.0",
+  "version": "2.26.0",
   "publishConfig": {
     "access": "public"
   },
@@ -35,7 +35,8 @@
     "moon-icon.{js,js.map,d.ts,d.ts.map}",
     "mars-icon.{js,js.map,d.ts,d.ts.map}",
     "floating-in-space.{js,js.map,d.ts,d.ts.map}",
-    "description-step.{js,js.map,d.ts,d.ts.map}"
+    "description-step.{js,js.map,d.ts,d.ts.map}",
+    "splash-screen.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",
