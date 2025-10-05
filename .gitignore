@@ -42,3 +42,10 @@ play-button.d.ts
 play-button.d.ts.map
 # only generated for size check
 play-button.bundled.js
+
+moon-icon.js
+moon-icon.js.map
+moon-icon.d.ts
+moon-icon.d.ts.map
+# only generated for size check
+moon-icon.bundled.js

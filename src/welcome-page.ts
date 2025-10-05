@@ -122,14 +122,12 @@ declare global {
   }
 }
 
-// declare rive in the global scope
-
 interface Rive {
   new (options: {
     src: string;
     canvas: HTMLCanvasElement;
     autoplay: boolean;
-    stateMachines: string;
+    stateMachines?: string;
     onLoad: () => void;
     artboard?: string;
   }): {
