@@ -1,8 +1,17 @@
 import {css, html, LitElement} from 'lit';
-import {customElement} from 'lit/decorators.js';
+import {customElement, state} from 'lit/decorators.js';
 
 @customElement('mission-step')
 export class MissionStep extends LitElement {
+  @state()
+  private selectedDestination: 'moon' | 'mars' = 'moon';
+  
+  @state()
+  private touchStartX = 0;
+  
+  @state()
+  private touchEndX = 0;
+
   static override styles = css`
       :host {
           width: 100%;
@@ -21,24 +30,288 @@ export class MissionStep extends LitElement {
           width: 100%;
           height: 100%;
           background-color: color-mix(in oklab, #0f172b 70%, transparent);
+          position: relative;
+          overflow: hidden;
+          transition: background-color 0.6s ease;
+      }
+      
+      .card.moon-selected {
+          background: linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #000000 100%);
+      }
+      
+      .card.mars-selected {
+          background: linear-gradient(135deg, #1a0a0a 0%, #2d1810 50%, #1a0505 100%);
+      }
+      
+      .stars {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: opacity 0.6s ease;
+          pointer-events: none;
+      }
+      
+      .stars.visible {
+          opacity: 1;
+      }
+      
+      .star {
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          background: white;
+          border-radius: 50%;
+          animation: twinkle 3s infinite;
+      }
+      
+      @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+      }
+      
+      @keyframes move-stars {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-100px); }
+      }
+      
+      .star:nth-child(odd) {
+          animation: twinkle 2s infinite, move-stars 20s linear infinite;
+      }
+      
+      .star:nth-child(even) {
+          animation: twinkle 4s infinite, move-stars 30s linear infinite;
       }
       
       .mission-container {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
+          align-items: center;
           width: 100%;
+          height: 100%;
           justify-content: center;
           position: relative;
+          padding: 2rem 1rem;
+          box-sizing: border-box;
       }
-  
+      
+      .title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          text-align: center;
+          margin-bottom: 0.5rem;
+          background: linear-gradient(135deg, #00b7d7 0%, #7c3aed 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          z-index: 10;
+      }
+      
+      .instruction {
+          font-size: 0.95rem;
+          text-align: center;
+          margin-bottom: 2rem;
+          color: rgba(255, 255, 255, 0.8);
+          z-index: 10;
+      }
+      
+      .carousel-wrapper {
+          position: relative;
+          width: 100%;
+          max-width: 280px;
+          height: 220px;
+          overflow: hidden;
+          touch-action: pan-y;
+          z-index: 10;
+      }
+      
+      .carousel-track {
+          display: flex;
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          width: 200%;
+          height: 100%;
+      }
+      
+      .carousel-slide {
+          min-width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0.5;
+          transform: scale(0.85);
+          transition: opacity 0.4s ease, transform 0.4s ease;
+      }
+      
+      .carousel-slide.active {
+          opacity: 1;
+          transform: scale(1);
+      }
+      
+      .destination-name {
+          font-size: 1.8rem;
+          font-weight: 800;
+          text-align: center;
+          margin-top: 1.5rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          z-index: 10;
+          transition: color 0.4s ease;
+      }
+      
+      .destination-name.moon {
+          color: #a0d8ff;
+          text-shadow: 0 0 20px rgba(160, 216, 255, 0.5);
+      }
+      
+      .destination-name.mars {
+          color: #ff6b4a;
+          text-shadow: 0 0 20px rgba(255, 107, 74, 0.5);
+      }
+      
+      .indicators {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: center;
+          margin-top: 1rem;
+          z-index: 10;
+      }
+      
+      .indicator {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.3);
+          transition: all 0.3s ease;
+          cursor: pointer;
+      }
+      
+      .indicator.active {
+          width: 24px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.9);
+      }
+      
+      .swipe-hint {
+          font-size: 0.8rem;
+          text-align: center;
+          color: rgba(255, 255, 255, 0.5);
+          margin-top: 1rem;
+          z-index: 10;
+          animation: pulse 2s infinite;
+      }
+      
+      @keyframes pulse {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
+      }
+      
+      @media (min-width: 768px) {
+          .title {
+              font-size: 2rem;
+          }
+          
+          .instruction {
+              font-size: 1.1rem;
+          }
+          
+          .carousel-wrapper {
+              max-width: 350px;
+              height: 280px;
+          }
+          
+          .destination-name {
+              font-size: 2.2rem;
+          }
+      }
   `;
 
+  private handleTouchStart(e: TouchEvent) {
+    this.touchStartX = e.touches[0].clientX;
+  }
+
+  private handleTouchMove(e: TouchEvent) {
+    this.touchEndX = e.touches[0].clientX;
+  }
+
+  private handleTouchEnd() {
+    if (this.touchStartX - this.touchEndX > 50) {
+      // Swipe left - go to Mars
+      this.selectedDestination = 'mars';
+    } else if (this.touchEndX - this.touchStartX > 50) {
+      // Swipe right - go to Moon
+      this.selectedDestination = 'moon';
+    }
+  }
+
+  private selectDestination(destination: 'moon' | 'mars') {
+    this.selectedDestination = destination;
+  }
+
+  private generateStars() {
+    const stars = [];
+    for (let i = 0; i < 50; i++) {
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      const delay = Math.random() * 3;
+      const size = Math.random() * 2 + 1;
+      stars.push(html`
+        <div
+          class="star"
+          style="left: ${left}%; top: ${top}%; animation-delay: ${delay}s; width: ${size}px; height: ${size}px;">
+        </div>
+      `);
+    }
+    return stars;
+  }
+
   override render() {
+    const isMoon = this.selectedDestination === 'moon';
+    const trackTransform = isMoon ? 'translateX(0)' : 'translateX(-50%)';
+    
     return html`
-      <div class="card">
+      <div class="card ${isMoon ? 'moon-selected' : 'mars-selected'}">
+        <div class="stars ${isMoon ? 'visible' : ''}">
+          ${this.generateStars()}
+        </div>
+        
         <div class="mission-container">
-          <moon-icon></moon-icon>
-          <mars-icon></mars-icon>
+          <h2 class="title">Escolha seu Destino</h2>
+          <p class="instruction">Deslize para selecionar a missão espacial</p>
+          
+          <div
+            class="carousel-wrapper"
+            @touchstart="${this.handleTouchStart}"
+            @touchmove="${this.handleTouchMove}"
+            @touchend="${this.handleTouchEnd}"
+          >
+            <div class="carousel-track" style="transform: ${trackTransform}">
+              <div class="carousel-slide ${isMoon ? 'active' : ''}">
+                <moon-icon></moon-icon>
+              </div>
+              <div class="carousel-slide ${!isMoon ? 'active' : ''}">
+                <mars-icon></mars-icon>
+              </div>
+            </div>
+          </div>
+          
+          <div class="destination-name ${isMoon ? 'moon' : 'mars'}">
+            ${isMoon ? 'Lua' : 'Marte'}
+          </div>
+          
+          <div class="indicators">
+            <div
+              class="indicator ${isMoon ? 'active' : ''}"
+              @click="${() => this.selectDestination('moon')}"
+            ></div>
+            <div
+              class="indicator ${!isMoon ? 'active' : ''}"
+              @click="${() => this.selectDestination('mars')}"
+            ></div>
+          </div>
+          
+          <div class="swipe-hint">← Deslize para alternar →</div>
         </div>
       </div>
     `;

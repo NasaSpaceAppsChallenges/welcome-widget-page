@@ -68,7 +68,7 @@ interface Rive {
     src: string;
     canvas: HTMLCanvasElement;
     autoplay: boolean;
-    stateMachines: string;
+    stateMachines?: string;
     onLoad: () => void;
     artboard?: string;
   }): {
