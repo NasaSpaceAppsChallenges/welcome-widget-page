@@ -1,17 +1,8 @@
 import {css, html, LitElement} from 'lit';
-import {customElement, state} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 
 @customElement('mission-step')
 export class MissionStep extends LitElement {
-  @state()
-  private selectedDestination: 'moon' | 'mars' = 'moon';
-  
-  @state()
-  private touchStartX = 0;
-  
-  @state()
-  private touchEndX = 0;
-
   static override styles = css`
       :host {
           width: 100%;
@@ -326,6 +317,15 @@ export class MissionStep extends LitElement {
           }
       }
   `;
+  
+  @property({ type: String, reflect: true })
+  private mission: 'moon' | 'mars' = 'moon';
+  
+  @state()
+  private touchStartX = 0;
+  
+  @state()
+  private touchEndX = 0;
 
   private handleTouchStart(e: TouchEvent) {
     this.touchStartX = e.touches[0].clientX;
@@ -338,15 +338,19 @@ export class MissionStep extends LitElement {
   private handleTouchEnd() {
     if (this.touchStartX - this.touchEndX > 50) {
       // Swipe left - go to Mars
-      this.selectedDestination = 'mars';
+      this.selectDestination('mars')
     } else if (this.touchEndX - this.touchStartX > 50) {
-      // Swipe right - go to Moon
-      this.selectedDestination = 'moon';
+      this.selectDestination('moon');
     }
   }
 
   private selectDestination(destination: 'moon' | 'mars') {
-    this.selectedDestination = destination;
+    this.mission = destination;
+    this.dispatchEvent(new CustomEvent('value-change', {
+      bubbles: true,
+      composed: true,
+      detail: this.mission
+    }));
   }
 
   private generateStars() {
@@ -385,7 +389,7 @@ export class MissionStep extends LitElement {
   }
 
   override render() {
-    const isMoon = this.selectedDestination === 'moon';
+    const isMoon = this.mission === 'moon';
     const trackTransform = isMoon ? 'translateX(0)' : 'translateX(0)';
     
     return html`

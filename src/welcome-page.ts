@@ -60,13 +60,13 @@ export class WelcomePage extends LitElement {
           filter: brightness(2);
           cursor: pointer;
       }
-      
+
       .step-container {
           width: 100%;
           height: 100%;
           max-height: calc(100% - 60px);
       }
-      
+
       .action-container {
           width: 100%;
           height: 50px;
@@ -74,20 +74,49 @@ export class WelcomePage extends LitElement {
           justify-content: space-between;
           align-items: center;
       }
+
+      .hidden {
+          opacity: 0;
+          pointer-events: none;
+      }
+
+      .btn-second {
+          background-color: transparent;
+          border-color: rgba(0, 183, 215, 0.2);
+      }
   `;
 
   @state()
   private _currentStep = 1;
+  
+  @state()
+  private missionName: 'moon' | 'mars' =  'moon';
+  
+  @state()
+  private astronautsQuantity = 2;
 
   override render() {
     let step = html``;
     switch (this._currentStep) {
       case 2:
-        step = html` <astronauts-step></astronauts-step>`;
+        step = html`
+          <astronauts-step
+            .astronautsQuantity=${this.astronautsQuantity}
+            @value-change=${(e: CustomEvent) => {
+              this.astronautsQuantity = e.detail;
+            }}
+          ></astronauts-step>`;
         break;
       default:
       case 1:
-        step = html` <mission-step></mission-step>`;
+        step = html`
+          <mission-step
+            .mission="${this.missionName}"
+            @value-change=${(e: CustomEvent) => {
+              this.missionName = e.detail;
+            }}
+          ></mission-step>`;
+        break;
     }
     return html`
       <main>
@@ -96,8 +125,27 @@ export class WelcomePage extends LitElement {
         </div>
         
         <div class="action-container">
-          <button @click=${this._onPrev}>prev</button>
-          <button @click=${this._onNext}>next</button>
+          <button
+            class="${this._currentStep === 1 ? 'hidden' : ''} btn-second"
+            @click=${this._onPrev}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="currentColor"
+            ><title>arrow-left-bold-outline</title><path d="M13,22L3,12L13,2V8H21V16H13V22M6,12L11,17V14H19V10H11V7L6,12Z" /></svg>
+          </button>
+          <button @click=${this._onNext}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="currentColor"
+            ><title>arrow-right-bold-outline</title><path d="M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z" /></svg>
+          </button>
         </div>
       </main>
     `;
