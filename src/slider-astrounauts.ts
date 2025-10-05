@@ -291,9 +291,6 @@ export class SliderAstrounauts extends LitElement {
             </button>
             <div class="counter">
               <div class="label">Astronautas</div>
-              <div class="hint" id="hint">
-                mín ${this.min} • máx ${this.max}
-              </div>
             </div>
             <button
               class="btn"
