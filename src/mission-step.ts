@@ -85,6 +85,70 @@ export class MissionStep extends LitElement {
           animation: twinkle 4s infinite, move-stars 30s linear infinite;
       }
       
+      .sand-storm {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: opacity 0.6s ease;
+          pointer-events: none;
+          overflow: hidden;
+      }
+      
+      .sand-storm.visible {
+          opacity: 1;
+      }
+      
+      .sand-particle {
+          position: absolute;
+          background: rgba(255, 170, 120, 0.4);
+          border-radius: 50%;
+      }
+      
+      @keyframes sand-drift {
+          0% {
+              transform: translate(0, 0) rotate(0deg);
+              opacity: 0;
+          }
+          10% {
+              opacity: 0.6;
+          }
+          90% {
+              opacity: 0.3;
+          }
+          100% {
+              transform: translate(150px, 120vh) rotate(360deg);
+              opacity: 0;
+          }
+      }
+      
+      @keyframes sand-drift-reverse {
+          0% {
+              transform: translate(0, 0) rotate(0deg);
+              opacity: 0;
+          }
+          10% {
+              opacity: 0.5;
+          }
+          90% {
+              opacity: 0.2;
+          }
+          100% {
+              transform: translate(-120px, 120vh) rotate(-360deg);
+              opacity: 0;
+          }
+      }
+      
+      .sand-particle:nth-child(odd) {
+          animation: sand-drift linear infinite;
+      }
+      
+      .sand-particle:nth-child(even) {
+          animation: sand-drift-reverse linear infinite;
+      }
+      
       .mission-container {
           display: flex;
           flex-direction: column;
@@ -281,6 +345,25 @@ export class MissionStep extends LitElement {
     return stars;
   }
 
+  private generateSandParticles() {
+    const particles = [];
+    for (let i = 0; i < 30; i++) {
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      const size = Math.random() * 10 + 5;
+      const animationDuration = Math.random() * 2 + 3;
+      const delay = Math.random() * 5;
+      const direction = Math.random() < 0.5 ? 1 : -1;
+      particles.push(html`
+        <div
+          class="sand-particle"
+          style="left: ${left}%; top: ${top}%; width: ${size}px; height: ${size}px; animation-duration: ${animationDuration}s; animation-delay: ${delay}s; transform: translate(${direction * 100}px, 0);">
+        </div>
+      `);
+    }
+    return particles;
+  }
+
   override render() {
     const isMoon = this.selectedDestination === 'moon';
     const trackTransform = isMoon ? 'translateX(0)' : 'translateX(0)';
@@ -289,6 +372,10 @@ export class MissionStep extends LitElement {
       <div class="card ${isMoon ? 'moon-selected' : 'mars-selected'}">
         <div class="stars ${isMoon ? 'visible' : ''}">
           ${this.generateStars()}
+        </div>
+        
+        <div class="sand-storm ${!isMoon ? 'visible' : ''}">
+          ${this.generateSandParticles()}
         </div>
         
         <div class="mission-container">
