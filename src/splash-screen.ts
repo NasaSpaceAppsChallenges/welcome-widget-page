@@ -79,6 +79,7 @@ export class SplashScreen extends LitElement {
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0, 183, 215, 0.3);
       animation: pulse 2s ease-in-out infinite;
+      background: #111f39;
     }
 
     @keyframes pulse {
