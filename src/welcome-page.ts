@@ -18,7 +18,7 @@ export class WelcomePage extends LitElement {
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 16px;
+          padding: 16px !important;
           background-color: #020618;
           box-sizing: border-box;
       }
