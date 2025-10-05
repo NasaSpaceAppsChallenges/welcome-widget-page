@@ -95,7 +95,7 @@ export class WelcomePage extends LitElement {
   `;
 
   @state()
-  private _currentStep = 3;
+  private _currentStep = 1;
 
   @state()
   private missionName: 'moon' | 'mars' = 'moon';
