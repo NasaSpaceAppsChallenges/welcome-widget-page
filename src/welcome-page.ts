@@ -94,6 +94,9 @@ export class WelcomePage extends LitElement {
   
   @state()
   private playerName = '';
+  
+  @state()
+  private missionDescription = '';
 
   @state()
   private astronautsQuantity = 2;
@@ -114,8 +117,12 @@ export class WelcomePage extends LitElement {
         step = html`
           <description-step
             .playerName=${this.playerName}
+            .missionDescription=${this.missionDescription}
             @name-change=${(e: CustomEvent) => {
               this.playerName = e.detail;
+            }}
+            @description-change=${(e: CustomEvent) => {
+              this.missionDescription = e.detail;
             }}
           ></description-step>`;
         break;

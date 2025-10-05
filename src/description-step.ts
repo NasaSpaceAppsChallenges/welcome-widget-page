@@ -234,7 +234,7 @@ export class DescriptionStep extends LitElement {
   `;
 
   @property({ type: String, reflect: true })
-  private astronautName = '';
+  private playerName = '';
   
   @property({ type: String, reflect: true })
   private missionDescription = '';
@@ -280,8 +280,16 @@ export class DescriptionStep extends LitElement {
                 name="astronautName"
                 placeholder="Digite seu nome aqui..."
                 maxlength="50"
-                .value=${this.astronautName}
-                @input=${(e: Event) => this.astronautName = (e.target as HTMLInputElement).value}
+                .value=${this.playerName}
+                @input=${(e: Event) => {
+                  this.playerName = (e.target as HTMLInputElement).value
+                  const event = new CustomEvent('name-change', {
+                    detail: this.playerName,
+                    bubbles: true,
+                    composed: true,
+                  });
+                  this.dispatchEvent(event);
+                }}
               />
               <div class="helper-text">
                 <span class="rocket-icon">🚀</span>
@@ -300,7 +308,15 @@ export class DescriptionStep extends LitElement {
                 placeholder="O que você pretende fazer? Explorar crateras na Lua? Construir uma base em Marte? Conte tudo sobre sua aventura..."
                 maxlength="${maxLength}"
                 .value=${this.missionDescription}
-                @input=${(e: Event) => this.missionDescription = (e.target as HTMLTextAreaElement).value}
+                @input=${(e: Event) => {
+                  this.missionDescription = (e.target as HTMLTextAreaElement).value
+                  const event = new CustomEvent('description-change', {
+                    detail: this.missionDescription,
+                    bubbles: true,
+                    composed: true,
+                  });
+                  this.dispatchEvent(event);
+                }}
               ></textarea>
               <div class="char-counter">
                 ${descriptionLength} / ${maxLength} caracteres
