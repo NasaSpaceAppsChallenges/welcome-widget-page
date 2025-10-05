@@ -122,31 +122,42 @@ export class MissionStep extends LitElement {
           width: 100%;
           max-width: 280px;
           height: 220px;
-          overflow: hidden;
+          overflow: visible;
           touch-action: pan-y;
           z-index: 10;
+          display: flex;
+          align-items: center;
+          justify-content: center;
       }
       
       .carousel-track {
           display: flex;
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          width: 200%;
           height: 100%;
+          position: relative;
+          left: 0;
       }
       
       .carousel-slide {
-          min-width: 100%;
+          width: 280px;
           display: flex;
           justify-content: center;
           align-items: center;
-          opacity: 0.5;
+          opacity: 0;
+          visibility: hidden;
           transform: scale(0.85);
-          transition: opacity 0.4s ease, transform 0.4s ease;
+          transition: opacity 0.5s ease, transform 0.4s ease, visibility 0.5s ease;
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
       }
       
       .carousel-slide.active {
           opacity: 1;
+          visibility: visible;
           transform: scale(1);
+          position: relative;
       }
       
       .destination-name {
@@ -221,6 +232,10 @@ export class MissionStep extends LitElement {
               height: 280px;
           }
           
+          .carousel-slide {
+              width: 350px;
+          }
+          
           .destination-name {
               font-size: 2.2rem;
           }
@@ -268,7 +283,7 @@ export class MissionStep extends LitElement {
 
   override render() {
     const isMoon = this.selectedDestination === 'moon';
-    const trackTransform = isMoon ? 'translateX(0)' : 'translateX(-50%)';
+    const trackTransform = isMoon ? 'translateX(0)' : 'translateX(0)';
     
     return html`
       <div class="card ${isMoon ? 'moon-selected' : 'mars-selected'}">
