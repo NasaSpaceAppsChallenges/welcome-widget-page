@@ -3,6 +3,11 @@ import {customElement, state} from 'lit/decorators.js';
 
 @customElement('welcome-page')
 export class WelcomePage extends LitElement {
+  static override shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    mode: 'closed' as const
+  };
+
   static override styles = css`
       :host {
           position: absolute;
@@ -15,6 +20,13 @@ export class WelcomePage extends LitElement {
           align-items: center;
           padding: 16px;
           background-color: #020618;
+          box-sizing: border-box;
+      }
+      
+      * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
       }
 
       main {
@@ -25,6 +37,8 @@ export class WelcomePage extends LitElement {
           gap: 16px;
           width: 100%;
           height: 100%;
+          padding: 0;
+          margin: 0;
       }
 
       .card {
@@ -39,6 +53,8 @@ export class WelcomePage extends LitElement {
           width: 100%;
           height: calc(100% - 32px);
           background-color: color-mix(in oklab, #0f172b 70%, transparent);
+          margin: 0;
+          padding: 0;
       }
 
       button {
@@ -50,6 +66,8 @@ export class WelcomePage extends LitElement {
           border-radius: 16px;
           height: 50px;
           min-width: 80px;
+          margin: 0;
+          padding: 0;
       }
 
       button:active {
