@@ -38,6 +38,7 @@ export class MissionStep extends LitElement {
       <div class="card">
         <div class="mission-container">
           <moon-icon></moon-icon>
+          <mars-icon></mars-icon>
         </div>
       </div>
     `;

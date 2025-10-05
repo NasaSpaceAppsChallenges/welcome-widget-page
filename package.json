@@ -32,7 +32,8 @@
     "mission-step.{js,js.map,d.ts,d.ts.map}",
     "astronauts-step.{js,js.map,d.ts,d.ts.map}",
     "play-button.{js,js.map,d.ts,d.ts.map}",
-    "moon-icon.{js,js.map,d.ts,d.ts.map}"
+    "moon-icon.{js,js.map,d.ts,d.ts.map}",
+    "mars-icon.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",

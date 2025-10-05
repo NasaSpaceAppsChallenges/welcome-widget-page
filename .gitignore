@@ -49,3 +49,10 @@ moon-icon.d.ts
 moon-icon.d.ts.map
 # only generated for size check
 moon-icon.bundled.js
+
+mars-icon.js
+mars-icon.js.map
+mars-icon.d.ts
+mars-icon.d.ts.map
+# only generated for size check
+mars-icon.bundled.js
