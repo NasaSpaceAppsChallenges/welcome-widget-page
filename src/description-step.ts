@@ -263,13 +263,13 @@ export class DescriptionStep extends LitElement {
   `;
 
   @property({ type: String, reflect: true })
-  private playerName = '';
+  private playerName = 'OutOfSpacePlayer';
   
   @property({ type: String, reflect: true })
-  private missionName = '';
+  private missionName = 'OutOfSpaceMission';
   
   @property({ type: String, reflect: true })
-  private missionDescription = '';
+  private missionDescription = 'Explorar o espaço sideral e descobrir novos mundos!';
 
   private generateBackgroundStars() {
     const stars = [];
