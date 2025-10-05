@@ -102,6 +102,9 @@ export class WelcomePage extends LitElement {
 
   @state()
   private playerName = '';
+  
+  @state()
+  private missionTitle = '';
 
   @state()
   private missionDescription = '';
@@ -123,9 +126,13 @@ export class WelcomePage extends LitElement {
       case 3:
         step = html` <description-step
           .playerName=${this.playerName}
+          .missionName=${this.missionTitle}
           .missionDescription=${this.missionDescription}
           @name-change=${(e: CustomEvent) => {
             this.playerName = e.detail;
+          }}
+          @mission-name-change=${(e: CustomEvent) => {
+            this.missionTitle = e.detail;
           }}
           @description-change=${(e: CustomEvent) => {
             this.missionDescription = e.detail;
@@ -213,6 +220,7 @@ export class WelcomePage extends LitElement {
       detail: {
         missionName: this.missionName,
         playerName: this.playerName,
+        missionTitle: this.missionTitle,
         missionDescription: this.missionDescription,
         astronautsQuantity: this.astronautsQuantity,
       },

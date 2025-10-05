@@ -112,6 +112,10 @@ export class DescriptionStep extends LitElement {
     
     .form-group:nth-child(2) {
       animation-delay: 0.3s;
+    }
+    
+    .form-group:nth-child(3) {
+      animation-delay: 0.4s;
       flex: 1;
     }
     
@@ -237,6 +241,9 @@ export class DescriptionStep extends LitElement {
   private playerName = '';
   
   @property({ type: String, reflect: true })
+  private missionName = '';
+  
+  @property({ type: String, reflect: true })
   private missionDescription = '';
 
   private generateBackgroundStars() {
@@ -294,6 +301,34 @@ export class DescriptionStep extends LitElement {
               <div class="helper-text">
                 <span class="rocket-icon">🚀</span>
                 <span>Exemplo: Capitão João Silva</span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="missionName">
+                <span class="icon">🎯</span>
+                Qual o nome da sua missão?
+              </label>
+              <input
+                type="text"
+                id="missionName"
+                name="missionName"
+                placeholder="Dê um nome épico para sua missão..."
+                maxlength="50"
+                .value=${this.missionName}
+                @input=${(e: Event) => {
+                  this.missionName = (e.target as HTMLInputElement).value
+                  const event = new CustomEvent('mission-name-change', {
+                    detail: this.missionName,
+                    bubbles: true,
+                    composed: true,
+                  });
+                  this.dispatchEvent(event);
+                }}
+              />
+              <div class="helper-text">
+                <span>⭐</span>
+                <span>Exemplo: Operação Estrela Vermelha</span>
               </div>
             </div>
             
