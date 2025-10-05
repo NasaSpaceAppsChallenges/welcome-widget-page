@@ -103,13 +103,31 @@ export class MissionStep extends LitElement {
       
       .sand-particle {
           position: absolute;
-          background: rgba(255, 170, 120, 0.4);
+          background: rgba(255, 170, 120, 0.3);
           border-radius: 50%;
+          filter: blur(1px);
       }
       
       @keyframes sand-drift {
           0% {
-              transform: translate(0, 0) rotate(0deg);
+              transform: translateX(-20px);
+              opacity: 0;
+          }
+          10% {
+              opacity: 0.7;
+          }
+          90% {
+              opacity: 0.4;
+          }
+          100% {
+              transform: translateX(120vw);
+              opacity: 0;
+          }
+      }
+      
+      @keyframes sand-drift-reverse {
+          0% {
+              transform: translateX(120vw);
               opacity: 0;
           }
           10% {
@@ -119,24 +137,7 @@ export class MissionStep extends LitElement {
               opacity: 0.3;
           }
           100% {
-              transform: translate(150px, 120vh) rotate(360deg);
-              opacity: 0;
-          }
-      }
-      
-      @keyframes sand-drift-reverse {
-          0% {
-              transform: translate(0, 0) rotate(0deg);
-              opacity: 0;
-          }
-          10% {
-              opacity: 0.5;
-          }
-          90% {
-              opacity: 0.2;
-          }
-          100% {
-              transform: translate(-120px, 120vh) rotate(-360deg);
+              transform: translateX(-20px);
               opacity: 0;
           }
       }
@@ -347,17 +348,16 @@ export class MissionStep extends LitElement {
 
   private generateSandParticles() {
     const particles = [];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 200; i++) {
       const left = Math.random() * 100;
       const top = Math.random() * 100;
-      const size = Math.random() * 10 + 5;
-      const animationDuration = Math.random() * 2 + 3;
-      const delay = Math.random() * 5;
-      const direction = Math.random() < 0.5 ? 1 : -1;
+      const size = Math.random() * 3 + 1; // Tamanho reduzido: 1-4px
+      const animationDuration = Math.random() * 8 + 6; // 6-14 segundos
+      const delay = Math.random() * 8;
       particles.push(html`
         <div
           class="sand-particle"
-          style="left: ${left}%; top: ${top}%; width: ${size}px; height: ${size}px; animation-duration: ${animationDuration}s; animation-delay: ${delay}s; transform: translate(${direction * 100}px, 0);">
+          style="left: ${left}%; top: ${top}%; width: ${size}px; height: ${size}px; animation-duration: ${animationDuration}s; animation-delay: ${delay}s;">
         </div>
       `);
     }
