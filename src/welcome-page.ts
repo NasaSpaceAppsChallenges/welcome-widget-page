@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
+import {keyed} from 'lit/directives/keyed.js';
 
 @customElement('welcome-page')
 export class WelcomePage extends LitElement {
@@ -83,6 +84,18 @@ export class WelcomePage extends LitElement {
           width: 100%;
           height: 100%;
           max-height: calc(100% - 60px);
+          animation: stepEnter 0.5s ease-out forwards;
+      }
+
+      @keyframes stepEnter {
+          from {
+              opacity: 0;
+              transform: scale(0.9);
+          }
+          to {
+              opacity: 1;
+              transform: scale(1);
+          }
       }
 
       .action-container {
@@ -169,7 +182,7 @@ export class WelcomePage extends LitElement {
     }
     return html`
       <main>
-        <div class="step-container">${step}</div>
+        ${keyed(this._currentStep, html`<div class="step-container">${step}</div>`)}
 
         <div class="action-container">
           <button
