@@ -34,15 +34,15 @@ export class MissionStep extends LitElement {
           overflow: hidden;
           transition: background-color 0.6s ease;
       }
-      
+
       .card.moon-selected {
           background: linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #000000 100%);
       }
-      
+
       .card.mars-selected {
           background: linear-gradient(135deg, #1a0a0a 0%, #2d1810 50%, #1a0505 100%);
       }
-      
+
       .stars {
           position: absolute;
           top: 0;
@@ -53,11 +53,11 @@ export class MissionStep extends LitElement {
           transition: opacity 0.6s ease;
           pointer-events: none;
       }
-      
+
       .stars.visible {
           opacity: 1;
       }
-      
+
       .star {
           position: absolute;
           width: 2px;
@@ -66,25 +66,33 @@ export class MissionStep extends LitElement {
           border-radius: 50%;
           animation: twinkle 3s infinite;
       }
-      
+
       @keyframes twinkle {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 1; }
+          0%, 100% {
+              opacity: 0.3;
+          }
+          50% {
+              opacity: 1;
+          }
       }
-      
+
       @keyframes move-stars {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-100px); }
+          0% {
+              transform: translateY(0);
+          }
+          100% {
+              transform: translateY(-100px);
+          }
       }
-      
+
       .star:nth-child(odd) {
           animation: twinkle 2s infinite, move-stars 20s linear infinite;
       }
-      
+
       .star:nth-child(even) {
           animation: twinkle 4s infinite, move-stars 30s linear infinite;
       }
-      
+
       .sand-storm {
           position: absolute;
           top: 0;
@@ -96,11 +104,11 @@ export class MissionStep extends LitElement {
           pointer-events: none;
           overflow: hidden;
       }
-      
+
       .sand-storm.visible {
           opacity: 1;
       }
-      
+
       .sand-particle {
           position: absolute;
           background: rgba(255, 170, 120, 0.4);
@@ -108,7 +116,7 @@ export class MissionStep extends LitElement {
           filter: blur(0.5px);
           height: 1px;
       }
-      
+
       @keyframes sand-drift {
           0% {
               transform: translateX(-20px);
@@ -125,7 +133,7 @@ export class MissionStep extends LitElement {
               opacity: 0;
           }
       }
-      
+
       @keyframes sand-drift-reverse {
           0% {
               transform: translateX(120vw);
@@ -142,15 +150,15 @@ export class MissionStep extends LitElement {
               opacity: 0;
           }
       }
-      
+
       .sand-particle:nth-child(odd) {
           animation: sand-drift linear infinite;
       }
-      
+
       .sand-particle:nth-child(even) {
           animation: sand-drift-reverse linear infinite;
       }
-      
+
       .mission-container {
           display: flex;
           flex-direction: column;
@@ -162,19 +170,26 @@ export class MissionStep extends LitElement {
           padding: 2rem 1rem;
           box-sizing: border-box;
       }
-      
+
       .title {
           font-size: 1.5rem;
           font-weight: 700;
           text-align: center;
           margin-bottom: 0.5rem;
-          background: linear-gradient(135deg, #00b7d7 0%, #7c3aed 100%);
           -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
           background-clip: text;
           z-index: 10;
+          color: #a0d8ff;
+          text-shadow: 0 0 20px rgba(160, 216, 255, 0.5);
       }
-      
+
+      .title.mars {
+          color: #ff6b4a;
+          text-shadow: 0 0 20px rgba(255, 107, 74, 0.5);
+          background: none;
+          -webkit-text-fill-color: #ff6b4a;
+      }
+
       .instruction {
           font-size: 0.95rem;
           text-align: center;
@@ -182,7 +197,7 @@ export class MissionStep extends LitElement {
           color: rgba(255, 255, 255, 0.8);
           z-index: 10;
       }
-      
+
       .carousel-wrapper {
           position: relative;
           width: 100%;
@@ -195,7 +210,7 @@ export class MissionStep extends LitElement {
           align-items: center;
           justify-content: center;
       }
-      
+
       .carousel-track {
           display: flex;
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -203,7 +218,7 @@ export class MissionStep extends LitElement {
           position: relative;
           left: 0;
       }
-      
+
       .carousel-slide {
           width: 280px;
           display: flex;
@@ -218,14 +233,14 @@ export class MissionStep extends LitElement {
           top: 0;
           height: 100%;
       }
-      
+
       .carousel-slide.active {
           opacity: 1;
           visibility: visible;
           transform: scale(1);
           position: relative;
       }
-      
+
       .destination-name {
           font-size: 1.8rem;
           font-weight: 800;
@@ -236,17 +251,17 @@ export class MissionStep extends LitElement {
           z-index: 10;
           transition: color 0.4s ease;
       }
-      
+
       .destination-name.moon {
           color: #a0d8ff;
           text-shadow: 0 0 20px rgba(160, 216, 255, 0.5);
       }
-      
+
       .destination-name.mars {
           color: #ff6b4a;
           text-shadow: 0 0 20px rgba(255, 107, 74, 0.5);
       }
-      
+
       .indicators {
           display: flex;
           gap: 0.5rem;
@@ -254,7 +269,7 @@ export class MissionStep extends LitElement {
           margin-top: 1rem;
           z-index: 10;
       }
-      
+
       .indicator {
           width: 8px;
           height: 8px;
@@ -263,13 +278,13 @@ export class MissionStep extends LitElement {
           transition: all 0.3s ease;
           cursor: pointer;
       }
-      
+
       .indicator.active {
           width: 24px;
           border-radius: 4px;
           background: rgba(255, 255, 255, 0.9);
       }
-      
+
       .swipe-hint {
           font-size: 0.8rem;
           text-align: center;
@@ -278,30 +293,34 @@ export class MissionStep extends LitElement {
           z-index: 10;
           animation: pulse 2s infinite;
       }
-      
+
       @keyframes pulse {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 1; }
+          0%, 100% {
+              opacity: 0.5;
+          }
+          50% {
+              opacity: 1;
+          }
       }
-      
+
       @media (min-width: 768px) {
           .title {
               font-size: 2rem;
           }
-          
+
           .instruction {
               font-size: 1.1rem;
           }
-          
+
           .carousel-wrapper {
               max-width: 350px;
               height: 280px;
           }
-          
+
           .carousel-slide {
               width: 350px;
           }
-          
+
           .destination-name {
               font-size: 2.2rem;
           }
@@ -380,7 +399,7 @@ export class MissionStep extends LitElement {
         </div>
         
         <div class="mission-container">
-          <h2 class="title">Escolha seu Destino</h2>
+          <h2 class="title ${!isMoon ? 'mars' : ''}">Escolha seu Destino</h2>
           <p class="instruction">Deslize para selecionar a missão espacial</p>
           
           <div
