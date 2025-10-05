@@ -30,9 +30,8 @@ export class FloatingInSpace extends LitElement {
           left: 0;
           width: auto;
           height: 100vh;
-          aspect-ratio: 16/9
+          aspect-ratio: 16/9;
           background-color: black;
-          opacity: 0.6;
       }
   `;
   
