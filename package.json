@@ -1,6 +1,6 @@
 {
   "name": "@leandrodasilva/welcome-page",
-  "version": "2.10.0",
+  "version": "2.11.0",
   "publishConfig": {
     "access": "public"
   },
@@ -33,7 +33,8 @@
     "astronauts-step.{js,js.map,d.ts,d.ts.map}",
     "play-button.{js,js.map,d.ts,d.ts.map}",
     "moon-icon.{js,js.map,d.ts,d.ts.map}",
-    "mars-icon.{js,js.map,d.ts,d.ts.map}"
+    "mars-icon.{js,js.map,d.ts,d.ts.map}",
+    "floating-in-space.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",

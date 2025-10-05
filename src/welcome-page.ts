@@ -77,7 +77,7 @@ export class WelcomePage extends LitElement {
   `;
 
   @state()
-  private _currentStep = 1;
+  private _currentStep = 2;
 
   override render() {
     let step = html``;

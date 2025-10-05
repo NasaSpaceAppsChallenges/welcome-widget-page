@@ -56,3 +56,10 @@ mars-icon.d.ts
 mars-icon.d.ts.map
 # only generated for size check
 mars-icon.bundled.js
+
+floating-in-space.js
+floating-in-space.js.map
+floating-in-space.d.ts
+floating-in-space.d.ts.map
+# only generated for size check
+floating-in-space.bundled.js
