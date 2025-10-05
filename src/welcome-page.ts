@@ -104,104 +104,67 @@ export class WelcomePage extends LitElement {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          position: relative;
       }
 
-      .hidden {
-          opacity: 0;
-          pointer-events: none;
+      .step-indicators {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 6px;
+          align-items: center;
       }
 
-      .btn-second {
+      .step-indicator {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 2px solid rgba(0, 183, 215, 0.3);
           background-color: transparent;
-          border-color: rgba(0, 183, 215, 0.2);
-      }
-
-      .btn-play {
-          width: 160px;
-          background: none;
-          border: none;
-          padding: 0;
-          height: 60px;
-      }
-
-      .btn-jogar {
-          background: linear-gradient(135deg, #00b7d7 0%, #0066cc 100%);
-          border-color: rgba(0, 183, 215, 0.5);
-          border-width: 2px;
-          font-size: 18px;
-          font-weight: bold;
-          padding: 0 24px;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 12px;
-          min-width: 140px;
+          transition: all 0.3s ease;
           position: relative;
-          overflow: hidden;
-          animation: pulse 2s ease-in-out infinite, glow 2s ease-in-out infinite;
       }
 
-      .btn-jogar::before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 0;
-          height: 0;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.3);
-          transform: translate(-50%, -50%);
-          transition: width 0.6s, height 0.6s;
+      .step-indicator.completed {
+          background: linear-gradient(135deg, #00b7d7 0%, #0066cc 100%);
+          border-color: rgba(0, 183, 215, 0.8);
+          box-shadow: 0 0 8px rgba(0, 183, 215, 0.3);
       }
 
-      .btn-jogar:hover::before {
-          width: 300px;
-          height: 300px;
+      .step-indicator.active {
+          border-color: rgba(0, 183, 215, 0.8);
+          border-width: 2px;
+          animation: pulse-ring 2s ease-in-out infinite;
       }
 
-      .btn-jogar:hover {
-          transform: scale(1.05);
-          box-shadow: 0 0 20px rgba(0, 183, 215, 0.6), 0 0 40px rgba(0, 183, 215, 0.4);
-          filter: brightness(1.2);
+      .step-indicator svg {
+          width: 12px;
+          height: 12px;
+          color: white;
+          opacity: 0;
+          transform: scale(0);
+          transition: all 0.3s ease;
       }
 
-      .btn-jogar:active {
-          transform: scale(0.98);
-      }
-
-      .btn-jogar:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-          animation: none;
-      }
-
-      .btn-jogar:disabled:hover {
+      .step-indicator.completed svg {
+          opacity: 1;
           transform: scale(1);
-          box-shadow: 0 0 10px rgba(0, 183, 215, 0.4), 0 0 20px rgba(0, 183, 215, 0.2);
-          filter: brightness(1);
       }
 
-      .rocket-icon {
-          width: 24px;
-          height: 24px;
-          animation: rocket-float 1.5s ease-in-out infinite;
-          z-index: 1;
+      .step-line {
+          width: 16px;
+          height: 2px;
+          background-color: rgba(0, 183, 215, 0.3);
+          transition: all 0.3s ease;
       }
 
-      .loading-icon {
-          width: 24px;
-          height: 24px;
-          animation: spin 1s linear infinite;
-          z-index: 1;
-      }
-
-      @keyframes spin {
-          from {
-              transform: rotate(0deg);
-          }
-          to {
-              transform: rotate(360deg);
-          }
+      .step-line.completed {
+          background: linear-gradient(90deg, #00b7d7 0%, #0066cc 100%);
+          box-shadow: 0 0 6px rgba(0, 183, 215, 0.3);
       }
 
       @keyframes pulse {
@@ -229,6 +192,35 @@ export class WelcomePage extends LitElement {
           50% {
               transform: translateY(-4px) rotate(-45deg);
           }
+      }
+
+      @keyframes pulse-ring {
+          0%, 100% {
+              box-shadow: 0 0 0 0 rgba(0, 183, 215, 0.4);
+          }
+          50% {
+              box-shadow: 0 0 0 8px rgba(0, 183, 215, 0);
+          }
+      }
+
+      @keyframes spin {
+          from {
+              transform: rotate(0deg);
+          }
+          to {
+              transform: rotate(360deg);
+          }
+      }
+
+      .loading-icon {
+          animation: spin 1s linear infinite;
+      }
+
+      .btn-jogar {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
       }
   `;
 
@@ -313,6 +305,36 @@ export class WelcomePage extends LitElement {
               />
             </svg>
           </button>
+          
+          <div class="step-indicators">
+            <div class="step-indicator ${this._currentStep === 1 ? 'active' : this._currentStep > 1 ? 'completed' : ''}">
+              ${this._currentStep > 1
+                ? html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <title>check</title>
+                    <path d="M9,19L4,14L5.41,12.59L9,16.17L19.59,5.59L21,7L9,19Z" />
+                  </svg>`
+                : ''}
+            </div>
+            <div class="step-line ${this._currentStep > 1 ? 'completed' : ''}"></div>
+            <div class="step-indicator ${this._currentStep === 2 ? 'active' : this._currentStep > 2 ? 'completed' : ''}">
+              ${this._currentStep > 2
+                ? html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <title>check</title>
+                    <path d="M9,19L4,14L5.41,12.59L9,16.17L19.59,5.59L21,7L9,19Z" />
+                  </svg>`
+                : ''}
+            </div>
+            <div class="step-line ${this._currentStep > 2 ? 'completed' : ''}"></div>
+            <div class="step-indicator ${this._currentStep === 3 ? 'active' : this._currentStep > 3 ? 'completed' : ''}">
+              ${this._currentStep > 3
+                ? html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <title>check</title>
+                    <path d="M9,19L4,14L5.41,12.59L9,16.17L19.59,5.59L21,7L9,19Z" />
+                  </svg>`
+                : ''}
+            </div>
+          </div>
+          
           ${this._currentStep === 3
             ? html`
               <button
@@ -320,7 +342,7 @@ export class WelcomePage extends LitElement {
                 ?disabled=${this.isLoading}
                 @click=${this._submit}
               >
-                <span>${this.isLoading ? 'Carregando...' : 'Jogar'}</span>
+                <span>${this.isLoading ? '' : 'Jogar'}</span>
                 ${this.isLoading
                   ? html`
                     <svg
@@ -328,6 +350,8 @@ export class WelcomePage extends LitElement {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
+                      width="16"
+                      height="16"
                     >
                       <title>loading</title>
                       <path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
@@ -339,6 +363,8 @@ export class WelcomePage extends LitElement {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
+                      width="16"
+                      height="16"
                     >
                       <title>rocket</title>
                       <path d="M2.81,14.12L5.64,11.29L8.17,10.79C11.39,6.41 17.29,4.43 19.43,4.05C19.89,9.94 17.64,15.86 13.81,19.16L13.09,21.34L10.88,18.65L-0.03,19.36L2.81,14.12M9.32,11.93L6.25,12.5L4.75,14.5L7.2,14.16L9.32,11.93M13.3,17.91L14.25,15.66L11.93,13.44L13.03,17.06L13.3,17.91M5.19,16.54C5.19,16.54 5.63,16.42 6.08,15.97C6.53,15.53 6.65,15.09 6.65,15.09C6.65,15.09 6.21,15.21 5.76,15.65C5.31,16.1 5.19,16.54 5.19,16.54M16.89,9.5A2,2 0 0,0 14.89,11.5C14.89,12.03 15.12,12.5 15.47,12.84C15.47,12.84 15.53,12.83 15.59,12.81C16.09,12.67 16.5,12.27 16.64,11.77C16.67,11.66 16.68,11.59 16.68,11.59C16.35,11.24 15.89,11 15.39,11C14.61,11 14,11.61 14,12.39C14,12.89 14.24,13.35 14.59,13.68C14.59,13.68 14.66,13.67 14.77,13.64C15.27,13.5 15.67,13.09 15.81,12.59C15.83,12.53 15.84,12.47 15.84,12.47C16.18,12.12 16.39,11.64 16.39,11.11C16.39,9.93 15.43,9 14.27,9C13.57,9 12.93,9.38 12.59,9.97L12.59,9.97C13.5,9.13 14.93,9.03 16.06,9.72C16.5,9.97 16.82,10.39 16.89,9.5Z"/>
