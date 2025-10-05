@@ -298,7 +298,7 @@ export class DescriptionStep extends LitElement {
         </div>
         
         <div class="content">
-          <h2 class="subtitle">Conte-nos sobre você e sua missão épica!</h2>
+          <h2 class="subtitle">Para uma missão épica</h2>
           
           <div class="form-container">
             <div class="form-group">
