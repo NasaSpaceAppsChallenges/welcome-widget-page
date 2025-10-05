@@ -410,7 +410,12 @@ export class MissionStep extends LitElement {
     const trackTransform = isMoon ? 'translateX(0)' : 'translateX(0)';
     
     return html`
-      <div class="card ${isMoon ? 'moon-selected' : 'mars-selected'}">
+      <div
+        class="card ${isMoon ? 'moon-selected' : 'mars-selected'}"
+        @touchstart="${this.handleTouchStart}"
+        @touchmove="${this.handleTouchMove}"
+        @touchend="${this.handleTouchEnd}"
+      >
         <div class="stars ${isMoon ? 'visible' : ''}">
           ${this._stars}
         </div>
@@ -423,12 +428,7 @@ export class MissionStep extends LitElement {
           <h2 class="title ${!isMoon ? 'mars' : ''}">Escolha seu Destino</h2>
           <p class="instruction">Deslize para selecionar a missão espacial</p>
           
-          <div
-            class="carousel-wrapper"
-            @touchstart="${this.handleTouchStart}"
-            @touchmove="${this.handleTouchMove}"
-            @touchend="${this.handleTouchEnd}"
-          >
+          <div class="carousel-wrapper">
             <div class="carousel-track" style="transform: ${trackTransform}">
               <div class="carousel-slide ${isMoon ? 'active' : ''}">
                 <moon-icon></moon-icon>
