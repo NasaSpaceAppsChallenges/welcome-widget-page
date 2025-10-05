@@ -103,9 +103,10 @@ export class MissionStep extends LitElement {
       
       .sand-particle {
           position: absolute;
-          background: rgba(255, 170, 120, 0.3);
-          border-radius: 50%;
-          filter: blur(1px);
+          background: rgba(255, 170, 120, 0.4);
+          border-radius: 2px;
+          filter: blur(0.5px);
+          height: 1px;
       }
       
       @keyframes sand-drift {
@@ -114,10 +115,10 @@ export class MissionStep extends LitElement {
               opacity: 0;
           }
           10% {
-              opacity: 0.7;
+              opacity: 0.8;
           }
           90% {
-              opacity: 0.4;
+              opacity: 0.5;
           }
           100% {
               transform: translateX(120vw);
@@ -131,10 +132,10 @@ export class MissionStep extends LitElement {
               opacity: 0;
           }
           10% {
-              opacity: 0.6;
+              opacity: 0.7;
           }
           90% {
-              opacity: 0.3;
+              opacity: 0.4;
           }
           100% {
               transform: translateX(-20px);
@@ -348,16 +349,16 @@ export class MissionStep extends LitElement {
 
   private generateSandParticles() {
     const particles = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 100; i++) {
       const left = Math.random() * 100;
       const top = Math.random() * 100;
-      const size = Math.random() * 3 + 1; // Tamanho reduzido: 1-4px
+      const width = Math.random() * 15 + 5; // Largura do traço: 5-20px
       const animationDuration = Math.random() * 8 + 6; // 6-14 segundos
       const delay = Math.random() * 8;
       particles.push(html`
         <div
           class="sand-particle"
-          style="left: ${left}%; top: ${top}%; width: ${size}px; height: ${size}px; animation-duration: ${animationDuration}s; animation-delay: ${delay}s;">
+          style="left: ${left}%; top: ${top}%; width: ${width}px; animation-duration: ${animationDuration}s; animation-delay: ${delay}s;">
         </div>
       `);
     }

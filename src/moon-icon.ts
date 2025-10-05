@@ -20,8 +20,8 @@ export class MoonIcon extends LitElement {
       
       canvas {
           position: absolute;
-          top: 0;
-          left: 0;
+          top: 5px;
+          left: 6px;
           width: 250px;
           height: 200px;
           background-color: black;
