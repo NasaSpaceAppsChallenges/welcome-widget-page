@@ -63,3 +63,10 @@ floating-in-space.d.ts
 floating-in-space.d.ts.map
 # only generated for size check
 floating-in-space.bundled.js
+
+description-step.js
+description-step.js.map
+description-step.d.ts
+description-step.d.ts.map
+# only generated for size check
+description-step.bundled.js

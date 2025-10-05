@@ -4,94 +4,97 @@ import {customElement, state} from 'lit/decorators.js';
 @customElement('welcome-page')
 export class WelcomePage extends LitElement {
   static override styles = css`
-      :host {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          top: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 16px;
-          background-color: #020618;
-      }
+    :host {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      background-color: #020618;
+    }
 
-      main {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: 16px;
-          width: 100%;
-          height: 100%;
-      }
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      height: 100%;
+    }
 
-      .card {
-          display: block;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          border-radius: 1.5rem;
-          backdrop-filter: blur(10px);
-          color: white;
-          border-color: rgba(0, 183, 215, 0.2);
-          border-style: solid;
-          border-width: 1px;
-          width: 100%;
-          height: calc(100% - 32px);
-          background-color: color-mix(in oklab, #0f172b 70%, transparent);
-      }
+    .card {
+      display: block;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 1.5rem;
+      backdrop-filter: blur(10px);
+      color: white;
+      border-color: rgba(0, 183, 215, 0.2);
+      border-style: solid;
+      border-width: 1px;
+      width: 100%;
+      height: calc(100% - 32px);
+      background-color: color-mix(in oklab, #0f172b 70%, transparent);
+    }
 
-      button {
-          border-color: rgba(0, 183, 215, 0.2);
-          border-style: solid;
-          border-width: 1px;
-          background-color: color-mix(in oklab, #1a284c 70%, transparent);
-          color: white;
-          border-radius: 16px;
-          height: 50px;
-          min-width: 80px;
-      }
+    button {
+      border-color: rgba(0, 183, 215, 0.2);
+      border-style: solid;
+      border-width: 1px;
+      background-color: color-mix(in oklab, #1a284c 70%, transparent);
+      color: white;
+      border-radius: 16px;
+      height: 50px;
+      min-width: 80px;
+    }
 
-      button:active {
-          transform: scale(0.96);
-      }
+    button:active {
+      transform: scale(0.96);
+    }
 
-      button:hover {
-          filter: brightness(2);
-          cursor: pointer;
-      }
+    button:hover {
+      filter: brightness(2);
+      cursor: pointer;
+    }
 
-      .step-container {
-          width: 100%;
-          height: 100%;
-          max-height: calc(100% - 60px);
-      }
+    .step-container {
+      width: 100%;
+      height: 100%;
+      max-height: calc(100% - 60px);
+    }
 
-      .action-container {
-          width: 100%;
-          height: 50px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
+    .action-container {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .hidden {
-          opacity: 0;
-          pointer-events: none;
-      }
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-      .btn-second {
-          background-color: transparent;
-          border-color: rgba(0, 183, 215, 0.2);
-      }
+    .btn-second {
+      background-color: transparent;
+      border-color: rgba(0, 183, 215, 0.2);
+    }
   `;
 
   @state()
   private _currentStep = 1;
+
+  @state()
+  private missionName: 'moon' | 'mars' = 'moon';
   
   @state()
-  private missionName: 'moon' | 'mars' =  'moon';
-  
+  private playerName = '';
+
   @state()
   private astronautsQuantity = 2;
 
@@ -107,6 +110,15 @@ export class WelcomePage extends LitElement {
             }}
           ></astronauts-step>`;
         break;
+      case 3:
+        step = html`
+          <description-step
+            .playerName=${this.playerName}
+            @name-change=${(e: CustomEvent) => {
+              this.playerName = e.detail;
+            }}
+          ></description-step>`;
+        break;
       default:
       case 1:
         step = html`
@@ -120,10 +132,8 @@ export class WelcomePage extends LitElement {
     }
     return html`
       <main>
-        <div class="step-container">
-          ${step}
-        </div>
-        
+        <div class="step-container">${step}</div>
+
         <div class="action-container">
           <button
             class="${this._currentStep === 1 ? 'hidden' : ''} btn-second"
@@ -135,7 +145,12 @@ export class WelcomePage extends LitElement {
               width="24"
               height="24"
               fill="currentColor"
-            ><title>arrow-left-bold-outline</title><path d="M13,22L3,12L13,2V8H21V16H13V22M6,12L11,17V14H19V10H11V7L6,12Z" /></svg>
+            >
+              <title>arrow-left-bold-outline</title>
+              <path
+                d="M13,22L3,12L13,2V8H21V16H13V22M6,12L11,17V14H19V10H11V7L6,12Z"
+              />
+            </svg>
           </button>
           <button @click=${this._onNext}>
             <svg
@@ -144,19 +159,24 @@ export class WelcomePage extends LitElement {
               width="24"
               height="24"
               fill="currentColor"
-            ><title>arrow-right-bold-outline</title><path d="M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z" /></svg>
+            >
+              <title>arrow-right-bold-outline</title>
+              <path
+                d="M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z"
+              />
+            </svg>
           </button>
         </div>
       </main>
     `;
   }
-  
+
   private _onNext() {
-    if (this._currentStep < 2) {
+    if (this._currentStep <3) {
       this._currentStep++;
     }
   }
-  
+
   private _onPrev() {
     if (this._currentStep > 1) {
       this._currentStep--;

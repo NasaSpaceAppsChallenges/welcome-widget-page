@@ -34,7 +34,8 @@
     "play-button.{js,js.map,d.ts,d.ts.map}",
     "moon-icon.{js,js.map,d.ts,d.ts.map}",
     "mars-icon.{js,js.map,d.ts,d.ts.map}",
-    "floating-in-space.{js,js.map,d.ts,d.ts.map}"
+    "floating-in-space.{js,js.map,d.ts,d.ts.map}",
+    "description-step.{js,js.map,d.ts,d.ts.map}"
   ],
   "directories": {
     "doc": "docs",
